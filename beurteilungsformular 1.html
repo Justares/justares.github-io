@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Beurteilungsformular Auslernende</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f0f0f0;
+      position: relative;
+    }
+    .logo {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      height: 80px;
+      width: 220px;
+      object-fit: contain;
+    }
+    fieldset {
+      margin-bottom: 20px;
+      padding: 15px;
+      background: white;
+      border-radius: 8px;
+    }
+    legend {
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+    label {
+      display: inline-block;
+      margin-bottom: 5px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 10px;
+    }
+    table td {
+      padding: 5px;
+      vertical-align: top;
+    }
+    .rating-group {
+      margin: 15px 0;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+    .rating-group p.description {
+      display: none; /* wird in Tooltip verschoben */
+    }
+    input[type="text"],
+    input[type="date"],
+    textarea {
+      width: 95%;
+      padding: 5px;
+      box-sizing: border-box;
+    }
+    .subsection {
+      margin-top: 15px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      background: #fafafa;
+      border-radius: 4px;
+    }
+    .footnote {
+      font-size: 0.9em;
+      color: #555;
+      margin-top: 30px;
+      background: #fff;
+      padding: 10px 15px;
+      border-radius: 5px;
+      border-left: 4px solid #ccc;
+    }
+    .footnote h4 {
+      margin: 0 0 5px 0;
+    }
+    .footnote ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .footnote li {
+      margin-bottom: 4px;
+    }
+
+    /* Einheitliche Info-Icon- und Tooltip-Styles */
+    .info-icon {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      line-height: 16px;
+      text-align: center;
+      border-radius: 50%;
+      background-color: #333;
+      color: #fff;
+      font-size: 12px;
+      font-weight: bold;
+      margin-left: 6px;
+      cursor: help;
+      position: relative;
+      vertical-align: middle;
+    }
+    .info-icon .tooltip-text {
+      visibility: hidden;
+      width: 240px;
+      background-color: #333;
+      color: #fff;
+      text-align: left;
+      border-radius: 4px;
+      padding: 8px;
+      position: absolute;
+      z-index: 1000;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.2s ease-in-out;
+      font-size: 0.9em;
+      line-height: 1.3;
+    }
+    .info-icon .tooltip-text::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 6px;
+      border-style: solid;
+      border-color: #333 transparent transparent transparent;
+    }
+    .info-icon:hover .tooltip-text {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <img src="Bild.png" alt="Logo" class="logo">
+  <h1>Beurteilungsformular Auslernende</h1>
+  <form action="submit_form.php" method="post">
+    
+    <!-- Personal Data -->
+    <fieldset>
+      <legend>Auszubildender</legend>
+      <table>
+        <tr>
+          <td>
+            <label for="name">Name, Vorname:</label><br>
+            <input type="text" id="name" name="name" required>
+          </td>
+          <td>
+            <label for="ausbildungsberuf">Ausbildungsberuf:</label><br>
+            <input type="text" id="ausbildungsberuf" name="ausbildungsberuf" required>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="persnr">Pers.-Nr:</label><br>
+            <input type="text" id="persnr" name="persnr" required>
+          </td>
+          <td>
+            <label for="ausbildungsbeginn">Ausbildungsbeginn:</label><br>
+            <input type="text" id="ausbildungsbeginn" name="ausbildungsbeginn" required>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="geburtsdatum">Geburtsdatum:</label><br>
+            <input type="text" id="geburtsdatum" name="geburtsdatum" required>
+          </td>
+          <td>
+            <label for="ausbildungsende">Ausbildungsende:</label><br>
+            <input type="text" id="ausbildungsende" name="ausbildungsende" required>
+          </td>
+        </tr>
+      </table>
+    </fieldset>
+    
+    <!-- Evaluation Criteria -->
+    <fieldset>
+      <legend>Beurteilungsmerkmale</legend>
+
+      <!-- Ausbildungsinteresse -->
+      <div class="rating-group">
+        <label>Ausbildungsinteresse (Benotung):</label>
+        <span class="info-icon">?
+          <span class="tooltip-text">
+            Das Interesse an der Berufsausbildung sowie die Bereitschaft, Erlerntes umzusetzen und mit Fleiß und Einsatz die tägliche Arbeit zu verrichten.
+          </span>
+        </span>
+        <br>
+        <label><input type="radio" name="ausbildungsinteresse" value="1" required> 1</label>
+        <label><input type="radio" name="ausbildungsinteresse" value="2"> 2</label>
+        <label><input type="radio" name="ausbildungsinteresse" value="3"> 3</label>
+        <label><input type="radio" name="ausbildungsinteresse" value="4"> 4</label>
+        <label><input type="radio" name="ausbildungsinteresse" value="5"> 5</label>
+        <label><input type="radio" name="ausbildungsinteresse" value="6"> 6</label>
+      </div>
+
+      <!-- Auffassungsgabe -->
+      <div class="rating-group">
+        <label>Auffassungsgabe (Benotung):</label>
+        <span class="info-icon">?
+          <span class="tooltip-text">
+            Die Fähigkeit, Informationen, Zusammenhänge, komplexe Sachverhalte und Arbeitsabläufe zu verstehen sowie erworbene Kenntnisse und Fertigkeiten wiederzugeben und anzuwenden. Schnelligkeit, Richtigkeit und Vollständigkeit werden berücksichtigt.
+          </span>
+        </span>
+        <br>
+        <label><input type="radio" name="auffassungsgabe" value="1" required> 1</label>
+        <label><input type="radio" name="auffassungsgabe" value="2"> 2</label>
+        <label><input type="radio" name="auffassungsgabe" value="3"> 3</label>
+        <label><input type="radio" name="auffassungsgabe" value="4"> 4</label>
+        <label><input type="radio" name="auffassungsgabe" value="5"> 5</label>
+        <label><input type="radio" name="auffassungsgabe" value="6"> 6</label>
+      </div>
+
+      <!-- Engagement/Motivation -->
+      <div class="rating-group">
+        <label>Engagement/Motivation (Benotung):</label>
+        <span class="info-icon">?
+          <span class="tooltip-text">
+            Die Fähigkeit, Engagement und Motivation zu demonstrieren, sowie den eigenen Ausbildungsweg sowohl fachlich als auch hinsichtlich des Verhaltens aktiv zu gestalten.
+          </span>
+        </span>
+        <br>
+        <label><input type="radio" name="engagement" value="1" required> 1</label>
+        <label><input type="radio" name="engagement" value="2"> 2</label>
+        <label><input type="radio" name="engagement" value="3"> 3</label>
+        <label><input type="radio" name="engagement" value="4"> 4</label>
+        <label><input type="radio" name="engagement" value="5"> 5</label>
+        <label><input type="radio" name="engagement" value="6"> 6</label>
+      </div>
+
+      <!-- Gelerntes umsetzen -->
+      <div class="rating-group">
+        <label>Gelerntes umsetzen/anwenden (Benotung):</label>
+        <span class="info-icon">?
+          <span class="tooltip-text">
+            Die Fähigkeit, das Theoriewissen im praktischen Teil anzuwenden und letztendlich umzusetzen.
+          </span>
+        </span>
+        <br>
+        <label><input type="radio" name="gelerntes" value="1" required> 1</label>
+        <label><input type="radio" name="gelerntes" value="2"> 2</label>
+        <label><input type="radio" name="gelerntes" value="3"> 3</label>
+        <label><input type="radio" name="gelerntes" value="4"> 4</label>
+        <label><input type="radio" name="gelerntes" value="5"> 5</label>
+        <label><input type="radio" name="gelerntes" value="6"> 6</label>
+      </div>
+
+      <!-- Team- und Kommunikationsfähigkeit -->
+      <div class="rating-group">
+        <label>Team- und Kommunikationsfähigkeit (Benotung):</label>
+        <span class="info-icon">?
+          <span class="tooltip-text">
+            Das Verhalten im allgemeinen Arbeitsumfeld, die Teamfähigkeit sowie die kooperative Haltung am Arbeitsplatz. Außerdem wird die Fähigkeit beurteilt, sich sowohl mündlich als auch schriftlich auszudrücken.
+          </span>
+        </span>
+        <br>
+        <label><input type="radio" name="team" value="1" required> 1</label>
+        <label><input type="radio" name="team" value="2"> 2</label>
+        <label><input type="radio" name="team" value="3"> 3</label>
+        <label><input type="radio" name="team" value="4"> 4</label>
+        <label><input type="radio" name="team" value="5"> 5</label>
+        <label><input type="radio" name="team" value="6"> 6</label>
+      </div>
+    </fieldset>
+
+    <!-- Gesprächsnotiz -->
+    <fieldset>
+      <legend>Gesprächsnotiz in der Personalakte</legend>
+      <label><input type="radio" name="gespraechsnotiz" value="ja" required> Ja</label>
+      <label><input type="radio" name="gespraechsnotiz" value="nein"> Nein</label><br><br>
+      <label for="gespraechsnotiz_text">Bei Ja, welche?</label><br>
+      <textarea id="gespraechsnotiz_text" name="gespraechsnotiz_text" rows="4" cols="50"></textarea>
+    </fieldset>
+
+    <!-- Verkürzer & Übernahme -->
+    <fieldset>
+      <legend>Verkürzer</legend>
+      <label><input type="radio" name="verkürzer" value="ja" required> Ja</label>
+      <label><input type="radio" name="verkürzer" value="nein"> Nein</label>
+
+      <div class="subsection">
+        <h3>Übernahme des Auszubildenden</h3>
+        <label><input type="radio" name="uebernahme" value="ja" required> Ja</label><br>
+        <label><input type="radio" name="uebernahme" value="nein"> Nein</label><br>
+        <label><input type="radio" name="uebernahme" value="einschraenkung"> Mit Einschränkungen</label><br><br>
+        <label for="einschraenkung_text">Falls Einschränkungen, bitte kurz erläutern:</label><br>
+        <input type="text" id="einschraenkung_text" name="einschraenkung_text">
+      </div>
+
+      <div class="subsection">
+        <h3>Benotung</h3>
+        <label for="sozialverhalten">Sozialverhalten:</label><br>
+        <input type="text" id="sozialverhalten" name="sozialverhalten"><br><br>
+        <label for="arbeitsverhalten">Arbeitsverhalten:</label><br>
+        <input type="text" id="arbeitsverhalten" name="arbeitsverhalten"><br><br>
+        <label for="bemerkung">Bemerkung:</label><br>
+        <textarea id="bemerkung" name="bemerkung" rows="4" cols="50"></textarea>
+      </div>
+    </fieldset>
+
+    <!-- Fußnote -->
+    <div class="footnote">
+      <h4>Notenskala (1–6):</h4>
+      <ul>
+        <li><strong>1 – Sehr gut</strong>: Hervorragende Leistung, alle Anforderungen wurden mit Bravour und ohne Fehler erfüllt.</li>
+        <li><strong>2 – Gut</strong>: Sehr solide Leistung, fast alle Anforderungen wurden gut erfüllt, nur kleine Fehler oder Verbesserungspotential.</li>
+        <li><strong>3 – Befriedigend</strong>: Leistung ist in Ordnung, es gibt jedoch einige Schwächen und Verbesserungspotential.</li>
+        <li><strong>4 – Ausreichend</strong>: Mindestanforderungen sind erfüllt, jedoch mit auffälligen Mängeln und Schwächen.</li>
+        <li><strong>5 – Mangelhaft</strong>: Leistung ist unzureichend, viele Anforderungen wurden nicht erfüllt und es bestehen erhebliche Defizite.</li>
+        <li><strong>6 – Ungenügend</strong>: Die Leistung ist völlig unzureichend, keine oder nur sehr wenige Anforderungen wurden erfüllt.</li>
+      </ul>
+    </div>
+
+    <br>
+    <input type="submit" value="Absenden">
+  </form>
+</body>
+</html>

@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Persönlicher Entwicklungsbogen</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      line-height: 1.6;
+      background-color: #f0f0f0;
+      position: relative;
+    }
+    .logo {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      height: 80px;
+      width: 220px;
+      object-fit: contain;
+    }
+    fieldset {
+      margin-bottom: 20px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      background: white;
+      border-radius: 8px;
+    }
+    legend {
+      font-weight: bold;
+      padding: 0 5px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    input[type="text"],
+    input[type="date"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 5px;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 10px;
+    }
+    table th,
+    table td {
+      padding: 5px;
+      border: 1px solid #ccc;
+      vertical-align: top;
+    }
+    .inline-label {
+      display: inline-block;
+      margin-right: 10px;
+    }
+    .radio-group label {
+      margin-right: 15px;
+    }
+    .footnote {
+      font-size: 0.9em;
+      color: #555;
+      margin-top: 30px;
+      background: #fff;
+      padding: 10px 15px;
+      border-radius: 5px;
+      border-left: 4px solid #ccc;
+    }
+    .footnote h4 {
+      margin: 0 0 5px 0;
+    }
+    .footnote ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .footnote li {
+      margin-bottom: 4px;
+    }
+
+    /* Gemeinsame Info-Icon- und Tooltip-Stile */
+    .info-icon {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      line-height: 16px;
+      text-align: center;
+      border-radius: 50%;
+      background-color: #333;
+      color: #fff;
+      font-size: 12px;
+      font-weight: bold;
+      margin-left: 6px;
+      cursor: help;
+      position: relative;
+      vertical-align: middle;
+    }
+    .info-icon .tooltip-text {
+      visibility: hidden;
+      width: 240px;
+      background-color: #333;
+      color: #fff;
+      text-align: left;
+      border-radius: 4px;
+      padding: 8px;
+      position: absolute;
+      z-index: 1000;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.2s ease-in-out;
+      font-size: 0.9em;
+      line-height: 1.3;
+    }
+    .info-icon .tooltip-text::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 6px;
+      border-style: solid;
+      border-color: #333 transparent transparent transparent;
+    }
+    .info-icon:hover .tooltip-text {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <img src="Bild.png" alt="Logo" class="logo">
+
+  <h1>Persönlicher Entwicklungsbogen</h1>
+  <form action="submit_evolution.php" method="post">
+    
+    <!-- Gesprächsbeteiligte Section -->
+    <fieldset>
+      <legend>Gesprächsbeteiligte</legend>
+      <table>
+        <tr>
+          <th>Auszubildender</th>
+          <th>Ausbilderin</th>
+        </tr>
+        <tr>
+          <td>
+            <label for="az_name">
+              Name, Vorname
+              <span class="info-icon">?
+                <span class="tooltip-text">
+                  Vollständiger Name des Auszubildenden (Vorname und Nachname).
+                </span>
+              </span>
+            </label>
+            <input type="text" id="az_name" name="az_name" placeholder="Auszubildender" required>
+          </td>
+          <td>
+            <label for="ab_name">
+              Name, Vorname
+              <span class="info-icon">?
+                <span class="tooltip-text">
+                  Vollständiger Name der Ausbilderin (Vorname und Nachname).
+                </span>
+              </span>
+            </label>
+            <input type="text" id="ab_name" name="ab_name" placeholder="Ausbilderin" required>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="personalnummer">
+              Personalnummer
+              <span class="info-icon">?
+                <span class="tooltip-text">
+                  Interne Personalnummer des Auszubildenden.
+                </span>
+              </span>
+            </label>
+            <input type="text" id="personalnummer" name="personalnummer" placeholder="z.B. 12345">
+          </td>
+          <td>
+            <label for="gespraechsnummer">
+              Gesprächsnummer
+              <span class="info-icon">?
+                <span class="tooltip-text">
+                  Fortlaufende Nummer für dieses Entwicklungsgespräch.
+                </span>
+              </span>
+            </label>
+            <input type="text" id="gespraechsnummer" name="gespraechsnummer" placeholder="z.B. 3">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="ausbildungsberuf">
+              Ausbildungsberuf
+              <span class="info-icon">?
+                <span class="tooltip-text">
+                  Bezeichnung des Ausbildungsberufs des Auszubildenden.
+                </span>
+              </span>
+            </label>
+            <input type="text" id="ausbildungsberuf" name="ausbildungsberuf">
+          </td>
+          <td>
+            <label for="datum">
+              Datum
+              <span class="info-icon">?
+                <span class="tooltip-text">
+                  Datum des Entwicklungsgesprächs.
+                </span>
+              </span>
+            </label>
+            <input type="date" id="datum" name="datum">
+          </td>
+        </tr>
+      </table>
+      <div>
+        <label for="ausbildungsjahr">
+          Ausbildungsjahr
+          <span class="info-icon">?
+            <span class="tooltip-text">
+              Aktuelles Ausbildungsjahr (z.B. 1. Jahr, 2. Jahr).
+            </span>
+          </span>
+        </label>
+        <input type="text" id="ausbildungsjahr" name="ausbildungsjahr">
+      </div>
+      <div>
+        <label for="berufsschule">
+          Berufsschule
+          <span class="info-icon">?
+            <span class="tooltip-text">
+              Name der Berufsschule, die der Auszubildende besucht.
+            </span>
+          </span>
+        </label>
+        <input type="text" id="berufsschule" name="berufsschule">
+      </div>
+    </fieldset>
+    
+    <!-- Klausurnoten Section -->
+    <fieldset>
+      <legend>Klausurnoten</legend>
+      <label>
+        Wurden die Klausurnoten regelmäßig abgegeben?
+        <span class="info-icon">?
+          <span class="tooltip-text">
+            Hat der Auszubildende alle Klausuren termingerecht eingereicht?
+          </span>
+        </span>
+      </label>
+      <div class="radio-group">
+        <label><input type="radio" name="klausurnoten" value="ja" required> Ja</label>
+        <label><input type="radio" name="klausurnoten" value="nein"> Nein</label>
+      </div>
+      <label for="durchschnitt_note">
+        Durchschnittliche Note des Auszubildenden
+        <span class="info-icon">?
+          <span class="tooltip-text">
+            Durchschnitt der abgegebenen Klausurnoten (z.B. 2,50).
+          </span>
+        </span>
+      </label>
+      <input type="text" id="durchschnitt_note" name="durchschnitt_note" placeholder="x,xx">
+    </fieldset>
+    
+    <!-- Entwicklung Section -->
+    <fieldset>
+      <legend>Entwicklung</legend>
+      <label for="entwicklung">
+        Entwicklung
+        <span class="info-icon">?
+          <span class="tooltip-text">
+            Zusammenfassung der bisherigen fachlichen und persönlichen Entwicklung des Auszubildenden.
+          </span>
+        </span>
+      </label>
+      <textarea id="entwicklung" name="entwicklung" rows="4" placeholder="Entwicklung ..."></textarea>
+    </fieldset>
+    
+    <!-- Sozialverhalten Section -->
+    <fieldset>
+      <legend>Sozialverhalten (Benotung 1-6)</legend>
+      <table>
+        <tr>
+          <th>Kriterium</th>
+          <th>Selbsteinschätzung</th>
+          <th>Einschätzung des Ausbilders</th>
+        </tr>
+        <tr>
+          <td>
+            Team- und Kommunikationsfähigkeit
+            <span class="info-icon">?
+              <span class="tooltip-text">
+                Verhalten im Arbeitsumfeld, Kooperationsbereitschaft und Ausdrucksfähigkeit mündlich sowie schriftlich.
+              </span>
+            </span>
+          </td>
+          <td>
+            <select name="sozial_team_selbst" required>
+              <option value="">Bitte wählen</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </td>
+          <td>
+            <select name="sozial_team_ausbilder" required>
+              <option value="">Bitte wählen</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Verhalten gegenüber dem Umfeld
+            <span class="info-icon">?
+              <span class="tooltip-text">
+                Umgang mit Kollegen, Vorgesetzten und Kunden; Einhalten betrieblicher Regeln.
+              </span>
+            </span>
+          </td>
+          <td>
+            <select name="sozial_umfeld_selbst" required>
+              <option value="">Bitte wählen</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </td>
+          <td>
+            <select name="sozial_umfeld_ausbilder" required>
+              <option value="">Bitte wählen</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Wahrnehmung des Auszubildenden<br>
+            <small>(Gepflegt, Körperhaltung, Launisch etc.)</small>
+            <span class="info-icon">?
+              <span class="tooltip-text">
+                Erscheinungsbild und Verhalten des Auszubildenden, z.B. Gepflegtheit, Körpersprache, Stimmung.
+              </span>
+            </span>
+          </td>
+          <td>
+            <select name="sozial_wahrnehmung_selbst" required>
+              <option value="">Bitte wählen</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </td>
+          <td>
+            <select name="sozial_wahrnehmung_ausbilder" required>
+              <option value="">Bitte wählen</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Konflikt- und Kritikfähigkeit
+            <span class="info-icon">?
+              <span class="tooltip-text">
+                Fähigkeit, sachlich in Konflikten zu reagieren, Kritik anzunehmen und konstruktiv umzusetzen.
+              </span>
+            </span>
+          </td>
+          <td>
+            <select name="sozial_konflikt_selbst" required>
+              <option value="">Bitte wählen</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </td>
+          <td>
+            <select name="sozial_konflikt_ausbilder" required>
+              <option value="">Bitte wählen</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </td>
+        </tr>
+      </table>
+    </fieldset>
+    
+    <!-- Arbeits- und Lernverhalten Section -->
+    <fieldset>
+      <legend>Arbeits- und Lernverhalten</legend>
+      <table>
+        <tr>
+          <th>Kriterium</th>
+          <th>Selbsteinschätzung</th>
+          <th>Einschätzung des Ausbilders</th>
+        </tr>
+        <tr>
+          <td>
+            Fachkenntnisse
+            <span class="info-icon">?
+              <span class="tooltip-text">
+                Tiefe und Breite der fachlichen Kenntnisse im Ausbildungsberuf.
+              </span>
+            </span>
+          </td>
+          <td>
+            <select name="arbeits_fach_selbst" required>
+              <option value="">Bitte wählen</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </td>
+          <td>
+            <select name="arbeits_fach_ausbilder" required>
+              <option value="">Bitte wählen</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Gelerntes umsetzen und anwenden
+            <span class="info-icon">?
+              <span class="tooltip-text">
+                Fähigkeit, theoretisches Wissen praktisch anzuwenden und umzusetzen.
+              </span>
+            </span>
+          </td>
+          <td>
+            <select name="arbeits_umsetzen_selbst" required>
+              <option value="">Bitte wählen</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </td>
+          <td>
+            <select name="arbeits_umsetzen_ausbilder" required>
+              <option value="">Bitte wählen</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Arbeitsqualität
+            <span class="info-icon">?
+              <span class="tooltip-text">
+                Sorgfalt, Genauigkeit und fachliche Korrektheit der Arbeitsergebnisse.
+              </span>
+            </span>
+          </td>
+          <td>
+            <select name="arbeits_qual_selbst" required>
+              <option value="">Bitte wählen</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </td>
+          <td>
+            <select name="arbeits_qual_ausbilder" required>
+              <option value="">Bitte wählen</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Ordnung am Arbeitsplatz
+            <span class="info-icon">?
+              <span class="tooltip-text">
+                Sauberkeit und Organisation des Arbeitsplatzes.
+              </span>
+            </span>
+          </td>
+          <td>
+            <select name="arbeits_ordnung_selbst" required>
+              <option value="">Bitte wählen</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </td>
+          <td>
+            <select name="arbeits_ordnung_ausbilder" required>
+              <option value="">Bitte wählen</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Zuverlässigkeit
+            <span class="info-icon">?
+              <span class="tooltip-text">
+                Pünktlichkeit, Verlässlichkeit und Gewissenhaftigkeit.
+              </span>
+            </span>
+          </td>
+          <td>
+            <select name="arbeits_zuverlaessigkeit_selbst" required>
+              <option value="">Bitte wählen</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </td>
+          <td>
+            <select name="arbeits_zuverlaessigkeit_ausbilder" required>
+              <option value="">Bitte wählen</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Engagement/Motivation
+            <span class="info-icon">?
+              <span class="tooltip-text">
+                Eigeninitiative, Begeisterung und Einsatzbereitschaft.
+              </span>
+            </span>
+          </td>
+          <td>
+            <select name="arbeits_engagement_selbst" required>
+              <option value="">Bitte wählen</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </td>
+          <td>
+            <select name="arbeits_engagement_ausbilder" required>
+              <option value="">Bitte wählen</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Ausbildungsinteresse
+            <span class="info-icon">?
+              <span class="tooltip-text">
+                Interesse an der Ausbildung sowie Bereitschaft, Erlerntes anzuwenden.
+              </span>
+            </span>
+          </td>
+          <td>
+            <select name="arbeits_interesse_selbst" required>
+              <option value="">Bitte wählen</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </td>
+          <td>
+            <select name="arbeits_interesse_ausbilder" required>
+              <option value="">Bitte wählen</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </td>
+        </tr>
+      </table>
+    </fieldset>
+    
+    <!-- Ziele & Feedback Section -->
+    <fieldset>
+      <legend>Anmerkungen &amp; Feedback</legend>
+      <div>
+        <label for="zielsetzung">
+          Folgende Ziele werden festgelegt
+          <span class="info-icon">?
+            <span class="tooltip-text">
+              Konkrete Ziele und Maßnahmen für die nächste Entwicklungsphase.
+            </span>
+          </span>
+        </label>
+        <textarea id="zielsetzung" name="zielsetzung" rows="4" placeholder="Ziele ..."></textarea>
+      </div>
+      <div>
+        <label for="feedback_ausbilder">
+          Feedback des Ausbilders
+          <span class="info-icon">?
+            <span class="tooltip-text">
+              Rückmeldung des Ausbilders zu Stärken und Verbesserungsbereichen.
+            </span>
+          </span>
+        </label>
+        <textarea id="feedback_ausbilder" name="feedback_ausbilder" rows="4" placeholder="Feedback des Ausbilders ..."></textarea>
+      </div>
+      <div>
+        <label for="feedback_az">
+          Feedback des Auszubildenden
+          <span class="info-icon">?
+            <span class="tooltip-text">
+              Einschätzung und Anmerkungen des Auszubildenden zum Gespräch und den Zielen.
+            </span>
+          </span>
+        </label>
+        <textarea id="feedback_az" name="feedback_az" rows="4" placeholder="Feedback des Auszubildenden ..."></textarea>
+      </div>
+    </fieldset>
+    
+    <div class="footnote">
+      <h4>Notenskala (1–6):</h4>
+      <ul>
+        <li><strong>1 – Sehr gut</strong>: Hervorragende Leistung, alle Anforderungen wurden mit Bravour und ohne Fehler erfüllt.</li>
+        <li><strong>2 – Gut</strong>: Sehr solide Leistung, fast alle Anforderungen wurden gut erfüllt, nur kleine Fehler oder Verbesserungspotential.</li>
+        <li><strong>3 – Befriedigend</strong>: Leistung ist in Ordnung, es gibt jedoch einige Schwächen und Verbesserungspotential.</li>
+        <li><strong>4 – Ausreichend</strong>: Mindestanforderungen sind erfüllt, jedoch mit auffälligen Mängeln und Schwächen.</li>
+        <li><strong>5 – Mangelhaft</strong>: Leistung ist unzureichend, viele Anforderungen wurden nicht erfüllt und es bestehen erhebliche Defizite.</li>
+        <li><strong>6 – Ungenügend</strong>: Die Leistung ist völlig unzureichend, keine oder nur sehr wenige Anforderungen wurden erfüllt.</li>
+      </ul>
+    </div>
+
+    <br>
+    <input type="submit" value="Absenden">
+  </form>
+</body>
+</html>
